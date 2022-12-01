@@ -1,0 +1,31 @@
+<div class="card container mt-5 p-3" style="width: 60rem">
+  <div class="card-body">
+    <div>{{ stockName }}</div>
+    <div style="display: flex; justify-content: space-between; padding: 10px">
+      <div *ngFor="let stock of stocks[0]?.data">
+        <span
+          style="display: flex; justify-content: space-between; padding: 10px"
+        >
+          <div>
+            <div>{{ monthArray[stock.month - 1] }}</div>
+            <div>change : {{ stock.change }}</div>
+            <div>MSPR : {{ stock.mspr }}</div>
+          </div>
+          <div>
+            <span *ngIf="stock.change > 0" style="font-size: 50px; color: green"
+              >&#8679;</span
+            >
+            <span *ngIf="stock.change < 0" style="font-size: 50px; color: red"
+              >&#8681;</span
+            >
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div style="padding: 5px">
+    <button id="backBtn" (click)="redirectDetailsPage()">
+      Back to list of stocks
+    </button>
+  </div>
+</div>

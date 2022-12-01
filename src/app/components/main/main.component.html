@@ -1,0 +1,61 @@
+<div class="card text-center container mt-5 p-3" style="width: 60rem">
+  <div class="card-header">
+    <H2 class="text-danger">{{ title1 }}</H2>
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      Enter the symbol of a stock to track(i.e. AAPL,TSLA,GOOGL)
+    </p>
+    <input
+      type="text"
+      id="stockInput"
+      name="stockInput"
+      class="m-3"
+      [(ngModel)]="stockInput"
+    />
+
+    <button class="btn btn-primary m-3" id="trackBtn" (click)="displayStock()">
+      Track Stock
+    </button>
+  </div>
+</div>
+<div
+  class="card container mt-5 mb-5 p-1"
+  style="width: 60rem"
+  *ngFor="let stock of stocks"
+>
+  <div class="card-body">
+    <div style="display: flex; justify-content: space-between">
+      <span>{{ stock.title }} ({{ stock.searchInput }})</span>
+      <span
+        id="remove{{ stock.searchInput }}"
+        class="btn"
+        (click)="removeStock(stock)"
+        >X</span
+      >
+    </div>
+    <div style="display: flex; justify-content: start; padding: 10px">
+      <span>
+        <pre>Change Today : {{ stock.d }}   Opening Price : {{ stock.o }}</pre>
+        <pre>Current Price : {{ stock.c }}  High Price : {{ stock.h }}</pre>
+      </span>
+      <span>
+        <div
+          *ngIf="stock.c > 0"
+          style="font-size: 50px; color: green; margin-left: 75px"
+        >
+          &#8679;
+        </div>
+        <div
+          *ngIf="stock.c <= 0"
+          style="font-size: 50px; color: red; margin-left: 75px"
+        >
+          &#8681;
+        </div>
+      </span>
+    </div>
+    <button (click)="navigateToDetails(stock?.searchInput)">
+      Go to social sentiment details >>
+    </button>
+  </div>
+</div>
