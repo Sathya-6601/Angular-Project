@@ -10,10 +10,10 @@ import { DataService } from 'src/app/services/data.service';
 export class MainComponent implements OnInit {
   title1 = 'Stock-Tracking-App';
   stockInput: string = '';
-  stocks: any[] = [];
+  stocks = [];
 
   constructor(private dataService: DataService, private route: Router) {
-    const preData: any = localStorage.getItem('preData');
+    const preData = localStorage.getItem('preData');
     let dataCheck = JSON.parse(preData);
     console.log(JSON.parse(preData));
     if (!!dataCheck && dataCheck.length > 0) {
@@ -31,8 +31,8 @@ export class MainComponent implements OnInit {
     });
   }
 
-  getResponse(responseData: any) {
-    this.dataService.getQuote(this.stockInput).subscribe((response: any) => {
+  getResponse(responseData) {
+    this.dataService.getQuote(this.stockInput).subscribe((response) => {
       console.log('res:', response, responseData);
       response['searchInput'] = this.stockInput;
       response['title'] = responseData.name;
@@ -42,7 +42,7 @@ export class MainComponent implements OnInit {
     });
   }
 
-  removeStock(stock: any) {
+  removeStock(stock) {
     console.log(stock);
     this.stocks = this.stocks.filter(
       (elememnt) => elememnt['searchInput'] !== stock['searchInput']
@@ -51,7 +51,7 @@ export class MainComponent implements OnInit {
     localStorage.setItem('preData', storeTheData);
   }
 
-  navigateToDetails(stock: any) {
+  navigateToDetails(stock) {
     console.log(stock);
     let url: string = '/sentiment/' + stock;
     this.route.navigateByUrl(url);

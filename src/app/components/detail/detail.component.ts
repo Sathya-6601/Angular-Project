@@ -11,7 +11,7 @@ export class DetailComponent implements OnInit {
   stockInput: string = '';
   stockId: string = '';
   stockName: string = '';
-  stocks: any = [];
+  stocks  =[];
   monthArray = [
     'January',
     'February',
@@ -38,11 +38,11 @@ export class DetailComponent implements OnInit {
       console.log(param['id']);
       this.stockId = param['id'];
 
-      const preData: any = localStorage.getItem('preData');
+      const preData = localStorage.getItem('preData');
       let dataCheck = JSON.parse(preData);
 
       let nameValue = dataCheck.filter(
-        (element: any) => element['searchInput'] == param['id']
+        (element) => element['searchInput'] == param['id']
       );
       console.log('previousData', JSON.parse(preData), nameValue);
       this.stockName = `${nameValue[0]['title']} (${param['id']})`;

@@ -19,6 +19,6 @@ export class DataService {
   }
   
   getSentimentById (id : string) {
-    return this.http.get(this.mainUrl + "stock/insider-sentiment?symbol=" + id + "&from=2022-01-01&to=2022-03-01&token=bu4f8kn48v6uehqi3cqg");
+    return this.http.get(this.mainUrl + "stock/insider-sentiment?symbol=" + id + "&from=2022-09-01&to=2022-12-01&token=bu4f8kn48v6uehqi3cqg");
   }
 }
