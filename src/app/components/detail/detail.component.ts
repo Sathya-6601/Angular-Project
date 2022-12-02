@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { DataService } from 'src/app/services/data.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-detail',
@@ -11,7 +11,7 @@ export class DetailComponent implements OnInit {
   stockInput: string = '';
   stockId: string = '';
   stockName: string = '';
-  stocks  =[];
+  stocks = [];
   monthArray = [
     'January',
     'February',
