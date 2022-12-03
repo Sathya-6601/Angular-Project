@@ -1,6 +1,8 @@
+import { ArrayType } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { Stocks } from 'src/app/Stocks';
 
 @Component({
   selector: 'app-main',
@@ -8,9 +10,9 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./main.component.css'],
 })
 export class MainComponent implements OnInit {
-  title1 = 'Stock-Tracking-App';
+  title1 : string = 'Stock-Tracking-App';
   stockInput: string = '';
-  stocks = [];
+  stocks : Stocks []= [];
 
   constructor(private dataService: DataService, private route: Router) {
     const preData = localStorage.getItem('preData');
@@ -25,33 +27,33 @@ export class MainComponent implements OnInit {
 
   displayStock() {
     console.log(this.stockInput);
-    this.dataService.getProfileName(this.stockInput).subscribe((data) => {
+    this.dataService.getProfileName(this.stockInput).subscribe((data : object) => {
       console.log('data:', data);
       this.getResponse(data);
     });
   }
 
   getResponse(responseData) {
-    this.dataService.getQuote(this.stockInput).subscribe((response) => {
+    this.dataService.getQuote(this.stockInput).subscribe((response : Stocks) => {
       console.log('res:', response, responseData);
       response['searchInput'] = this.stockInput;
       response['title'] = responseData.name;
       this.stocks.push(response);
-      let storeData = JSON.stringify(this.stocks);
+      let storeData : string= JSON.stringify(this.stocks);
       localStorage.setItem('preData', storeData);
     });
   }
 
-  removeStock(stock) {
+  removeStock(stock : Stocks) {
     console.log(stock);
     this.stocks = this.stocks.filter(
-      (elememnt) => elememnt['searchInput'] !== stock['searchInput']
+      (elememnt : object) => elememnt['searchInput'] !== stock['searchInput']
     );
     let storeTheData = JSON.stringify(this.stocks);
     localStorage.setItem('preData', storeTheData);
   }
 
-  navigateToDetails(stock) {
+  navigateToDetails(stock ) {
     console.log(stock);
     let url: string = '/sentiment/' + stock;
     this.route.navigateByUrl(url);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { Sentiment, Stocks } from 'src/app/Stocks';
 
 @Component({
   selector: 'app-detail',
@@ -11,7 +12,7 @@ export class DetailComponent implements OnInit {
   stockInput: string = '';
   stockId: string = '';
   stockName: string = '';
-  stocks  =[];
+  stocks :Sentiment[]=[];
   monthArray = [
     'January',
     'February',
@@ -42,7 +43,7 @@ export class DetailComponent implements OnInit {
       let dataCheck = JSON.parse(preData);
 
       let nameValue = dataCheck.filter(
-        (element) => element['searchInput'] == param['id']
+        (element : object) => element['searchInput'] == param['id']
       );
       console.log('previousData', JSON.parse(preData), nameValue);
       this.stockName = `${nameValue[0]['title']} (${param['id']})`;
@@ -52,7 +53,7 @@ export class DetailComponent implements OnInit {
   }
 
   trackStock(id: string) {
-    this.dataService.getSentimentById(id).subscribe((data) => {
+    this.dataService.getSentimentById(id).subscribe((data : Sentiment): void => {
       this.stocks.push(data);
       console.log('Response received', this.stocks);
     });
