@@ -44,7 +44,7 @@ export class MainComponent implements OnInit {
     });
   }
 
-  removeStock(stock ) {
+  removeStock(stock : Stocks ) {
     console.log(stock);
     this.stocks = this.stocks.filter(
       (elememnt : object) => elememnt['searchInput'] !== stock['searchInput']
@@ -53,7 +53,7 @@ export class MainComponent implements OnInit {
     localStorage.setItem('preData', storeTheData);
   }
 
-  navigateToDetails(stock ) {
+  navigateToDetails(stock : Stocks): void {
     console.log(stock);
     let url: string = '/sentiment/' + stock;
     this.route.navigateByUrl(url);
