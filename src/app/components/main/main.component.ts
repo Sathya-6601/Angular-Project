@@ -2,6 +2,7 @@ import { ArrayType } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { Stocks } from 'src/app/Stocks';
 
 @Component({
   selector: 'app-main',
@@ -43,7 +44,7 @@ export class MainComponent implements OnInit {
     });
   }
 
-  removeStock(stock : Stocks) {
+  removeStock(stock ) {
     console.log(stock);
     this.stocks = this.stocks.filter(
       (elememnt : object) => elememnt['searchInput'] !== stock['searchInput']
